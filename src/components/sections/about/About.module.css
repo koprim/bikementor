@@ -1,0 +1,113 @@
+.wrapper {
+  padding: 0 40px;
+}
+
+.section {
+  background: var(--deep);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 24px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+  padding: 80px;
+}
+
+/* Visual */
+.visual { position: relative; }
+
+.imgFrame {
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--card);
+  position: relative;
+}
+
+.imgPlaceholder {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #1a1005, #2d1f08);
+}
+
+.imgPlaceholder .bigIcon { font-size: 5rem; opacity: 0.3; }
+.imgPlaceholder p {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bark);
+}
+
+.badge {
+  position: absolute;
+  bottom: -20px; right: -20px;
+  background: var(--gold);
+  color: var(--black);
+  border-radius: 50%;
+  width: 90px; height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.1;
+  font-size: 0.72rem;
+  box-shadow: 0 8px 32px rgba(240,168,50,0.4);
+}
+.badge strong { font-size: 1.4rem; display: block; line-height: 1; }
+
+/* Text */
+.text p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--rock);
+  margin-bottom: 16px;
+}
+.text p strong { color: var(--chalk); font-weight: 500; }
+
+.stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.statNum {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 2.2rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.72rem;
+  color: var(--rock);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  font-weight: 300;
+}
+
+@media (max-width: 900px) {
+  .wrapper { padding: 0 16px; }
+  .section {
+    grid-template-columns: 1fr;
+    padding: 50px 28px;
+    gap: 40px;
+  }
+  .badge { right: -8px; }
+}

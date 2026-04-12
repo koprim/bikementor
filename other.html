@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BikeMentor — Coaching VTT privé à Grenoble par Théo Poudret, pilote trial pro. Leçons privées, stages enduro, créations originales.">
+<title>BikeMentor Grenoble — Pilote ton Bike</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,700&family=Barlow:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --black:   #0a0804;
+  --deep:    #110e06;
+  --surface: #1a1608;
+  --card:    #1f1b0a;
+  --border:  #2e2510;
+  --bark:    #6b4e18;
+  --gold:    #f0a832;
+  --gold2:   #c8821a;
+  --rock:    #8a9490;
+  --chalk:   #f5f0e8;
+  --cream:   #faf7ef;
+  --star:    #f5b400;
+  --green:   #2d6b3c;
+  --nav-h:   68px;
+}
+
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--chalk);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  cursor: none;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { cursor: none; font-family: inherit; border: none; background: none; }
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════════ */
+.cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: transform .1s;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(240,168,50,0.5);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, transform .1s;
+}
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring { width: 56px; height: 56px; }
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  transition: background .4s, backdrop-filter .4s;
+}
+nav.scrolled {
+  background: rgba(10,8,4,0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--gold);
+}
+.nav-logo span { color: var(--chalk); }
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rock);
+  transition: color .2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width .25s;
+}
+.nav-links a:hover { color: var(--chalk); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border: 1px solid var(--gold);
+  border-radius: 30px;
+  color: var(--gold);
+  transition: background .2s, color .2s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--black); }
+
+/* hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 1.5px;
+  background: var(--chalk);
+  transition: transform .3s, opacity .3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* mobile menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,8,4,0.97);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transform: translateX(100%);
+  transition: transform .4s cubic-bezier(.25,.46,.45,.94);
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--chalk);
+  transition: color .2s;
+}
+.mobile-menu a:hover { color: var(--gold); }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+#hero {
+  min-height: 100svh;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 40px 80px;
+  overflow: hidden;
+}
+
+/* animated mountain bg */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 30%, rgba(30,20,5,0) 0%, rgba(10,8,4,0.7) 100%),
+    linear-gradient(160deg, #1a1005 0%, #0a0804 50%, #0d0e0a 100%);
+  overflow: hidden;
+}
+
+/* SVG mountain silhouettes */
+.hero-mountains {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 65%;
+}
+
+/* animated particles */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: float-up linear infinite;
+}
+
+@keyframes float-up {
+  0%   { opacity: 0; transform: translateY(0) translateX(0); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.2; }
+  100% { opacity: 0; transform: translateY(-120px) translateX(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+.hero-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fade-up .8s .3s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--gold);
+}
+.hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.5rem, 11vw, 9rem);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.88;
+  opacity: 0;
+  animation: fade-up .8s .5s forwards;
+}
+.hero-title .accent { color: var(--gold); display: block; }
+.hero-title .outline {
+  -webkit-text-stroke: 1px rgba(245,240,232,0.3);
+  color: transparent;
+  display: block;
+}
+
+.hero-desc {
+  margin-top: 28px;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--rock);
+  max-width: 480px;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fade-up .8s .7s forwards;
+}
+
+.hero-actions {
+  margin-top: 36px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  opacity: 0;
+  animation: fade-up .8s .9s forwards;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  background: var(--gold);
+  color: var(--black);
+  border-radius: 40px;
+  transition: background .2s, transform .2s;
+}
+.btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
+.btn-ghost {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 1px solid rgba(245,240,232,0.2);
+  border-radius: 40px;
+  color: var(--rock);
+  transition: border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color: var(--chalk); color: var(--chalk); }
+
+/* scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 32px; right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fade-up .8s 1.2s forwards;
+}
+.scroll-hint span {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bark);
+  writing-mode: vertical-lr;
+}
+.scroll-line {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, var(--bark), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════
+   SECTION BASE
+═══════════════════════════════════════════ */
+section { padding: 100px 40px; }
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--gold);
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s, transform .7s;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+
+@keyframes fade-up {
+  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(24px); }
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+#about {
+  background: var(--deep);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 24px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+  padding: 80px;
+}
+.about-visual {
+  position: relative;
+}
+.about-img-frame {
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--card);
+  position: relative;
+}
+.about-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #1a1005, #2d1f08);
+}
+.about-img-placeholder .big-icon { font-size: 5rem; opacity: 0.3; }
+.about-img-placeholder p {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bark);
+}
+.about-badge {
+  position: absolute;
+  bottom: -20px; right: -20px;
+  background: var(--gold);
+  color: var(--black);
+  border-radius: 50%;
+  width: 90px; height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.1;
+  font-size: 0.72rem;
+  box-shadow: 0 8px 32px rgba(240,168,50,0.4);
+}
+.about-badge strong { font-size: 1.4rem; display: block; line-height: 1; }
+
+.about-text .section-title { margin-bottom: 24px; }
+.about-text p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--rock);
+  margin-bottom: 16px;
+}
+.about-text p strong { color: var(--chalk); font-weight: 500; }
+.about-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 2.2rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--rock);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════════ */
+#services {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.services-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.service-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: border-color .25s, transform .25s;
+  display: flex;
+  flex-direction: column;
+}
+.service-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-6px);
+}
+.service-card:hover .service-cta { color: var(--gold); }
+.service-card:hover .service-cta-arrow { transform: translateX(6px); }
+
+.service-visual {
+  height: 200px;
+  background: linear-gradient(135deg, #1a1005, #2a1c08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.service-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--card), transparent 60%);
+}
+.service-visual-icon { position: relative; z-index: 1; }
+
+.service-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+.service-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.service-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.service-desc {
+  font-size: 0.83rem;
+  font-weight: 300;
+  color: var(--rock);
+  line-height: 1.7;
+  flex: 1;
+}
+.service-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.service-detail {
+  font-size: 0.72rem;
+  color: var(--bark);
+  letter-spacing: 0.06em;
+}
+.service-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rock);
+  transition: color .2s;
+}
+.service-cta-arrow { transition: transform .25s; }
+
+/* ═══════════════════════════════════════════
+   REVIEWS
+═══════════════════════════════════════════ */
+#reviews {
+  background: var(--deep);
+  position: relative;
+  overflow: hidden;
+}
+#reviews::before {
+  content: '"';
+  position: absolute;
+  left: -20px; top: -60px;
+  font-size: 28rem;
+  color: rgba(255,255,255,0.02);
+  font-family: Georgia, serif;
+  line-height: 1;
+  pointer-events: none;
+}
+.reviews-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.reviews-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.overall-block {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.overall-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 3.4rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.overall-meta { text-align: left; }
+.stars-row { display: flex; gap: 3px; }
+.star-icon { color: var(--star); font-size: 1rem; }
+.star-icon.empty { color: #2a2010; }
+.review-count { font-size: 0.72rem; color: var(--rock); margin-top: 4px; letter-spacing: 0.06em; }
+.google-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  color: var(--bark);
+  margin-top: 3px;
+}
+.g-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: conic-gradient(#4285f4 0 25%, #ea4335 25% 50%, #fbbc04 50% 75%, #34a853 75%);
+  flex-shrink: 0;
+}
+
+/* carousel */
+.carousel-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.carousel-wrap::before,
+.carousel-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+.carousel-wrap::before { left: 0; background: linear-gradient(to right, var(--deep), transparent); }
+.carousel-wrap::after  { right: 0; background: linear-gradient(to left, var(--deep), transparent); }
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: transform .55s cubic-bezier(.25,.46,.45,.94);
+  padding: 8px 4px;
+}
+
+.review-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color .2s, transform .2s;
+  position: relative;
+  overflow: hidden;
+}
+.review-card::before {
+  content: '"';
+  position: absolute;
+  top: -20px; right: 14px;
+  font-size: 8rem;
+  color: var(--border);
+  font-family: Georgia, serif;
+  line-height: 1;
+  pointer-events: none;
+}
+.review-card:hover { border-color: var(--bark); transform: translateY(-4px); }
+.card-top { display: flex; align-items: center; gap: 12px; }
+.reviewer-av {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--bark);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1rem;
+  color: var(--black);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.reviewer-av img { width: 100%; height: 100%; object-fit: cover; }
+.reviewer-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.review-when { font-size: 0.68rem; color: var(--rock); margin-top: 1px; font-weight: 300; }
+.card-stars { display: flex; gap: 2px; }
+.cs { color: var(--star); font-size: 0.82rem; }
+.cs.e { color: #2a2010; }
+.review-text {
+  font-size: 0.82rem;
+  font-style: italic;
+  font-weight: 300;
+  color: #b8b0a0;
+  line-height: 1.7;
+  flex: 1;
+}
+.review-service {
+  font-size: 0.63rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bark);
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+/* carousel controls */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+.c-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--chalk);
+  font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s, background .2s;
+}
+.c-btn:hover { border-color: var(--gold); background: rgba(240,168,50,0.1); }
+.c-dots { display: flex; gap: 6px; }
+.c-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background .2s, transform .2s;
+}
+.c-dot.on { background: var(--gold); transform: scale(1.5); }
+.progress-bar {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--gold);
+  width: 0%;
+}
+
+/* ═══════════════════════════════════════════
+   GALLERY
+═══════════════════════════════════════════ */
+#gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 12px;
+  margin-top: 50px;
+}
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  transition: transform .25s;
+  position: relative;
+}
+.gallery-item:hover { transform: scale(1.02); }
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; min-height: 320px; }
+.gallery-item:nth-child(5) { grid-column: span 2; }
+.gallery-placeholder { opacity: 0.2; }
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+#contact {
+  background: var(--deep);
+}
+.contact-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-left .section-title { margin-bottom: 24px; }
+.contact-left p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--rock);
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+.contact-info { display: flex; flex-direction: column; gap: 16px; }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.85rem;
+  color: var(--rock);
+  font-weight: 300;
+}
+.contact-item-icon {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.contact-item strong { color: var(--chalk); font-weight: 500; }
+.response-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.7rem;
+  color: #5a9b6a;
+  letter-spacing: 0.06em;
+  margin-top: 24px;
+}
+.response-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #5a9b6a;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* form */
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.field-group { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.field label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bark);
+  font-weight: 600;
+}
+.field input,
+.field select,
+.field textarea {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: var(--chalk);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 300;
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+}
+.field input::placeholder,
+.field textarea::placeholder { color: var(--bark); opacity: 0.6; }
+.field input:focus,
+.field select:focus,
+.field textarea:focus { border-color: var(--gold); }
+.field select option { background: var(--card); }
+.field textarea { resize: vertical; min-height: 120px; }
+.form-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  background: var(--gold);
+  color: var(--black);
+  border-radius: 40px;
+  border: none;
+  width: fit-content;
+  transition: background .2s, transform .2s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: var(--cream); transform: translateY(-2px); }
+.form-note {
+  font-size: 0.7rem;
+  color: var(--bark);
+  font-weight: 300;
+  margin-top: 4px;
+}
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 40px;
+  background: rgba(45,107,60,0.1);
+  border: 1px solid rgba(45,107,60,0.3);
+  border-radius: 16px;
+}
+.form-success .success-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.form-success h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  color: #7dd89a;
+}
+.form-success p { font-size: 0.82rem; color: var(--rock); font-weight: 300; line-height: 1.6; }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer {
+  padding: 40px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.footer-logo span { color: var(--chalk); }
+.footer-copy {
+  font-size: 0.72rem;
+  color: var(--bark);
+  letter-spacing: 0.06em;
+}
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+.footer-social a {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  color: var(--rock);
+  transition: border-color .2s, color .2s;
+}
+.footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  section { padding: 70px 24px; }
+  #hero { padding: 0 24px 70px; }
+  #about {
+    grid-template-columns: 1fr;
+    padding: 50px 28px;
+    margin: 0 16px;
+    gap: 40px;
+  }
+  .about-badge { right: -8px; }
+  .services-grid { grid-template-columns: 1fr; gap: 16px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 50px; }
+  .field-group { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2,1fr); }
+  .gallery-item:nth-child(1) { grid-column: span 2; min-height: 220px; }
+  .gallery-item:nth-child(5) { grid-column: span 2; }
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  footer { padding: 28px 24px; }
+}
+
+@media (max-width: 600px) {
+  .hero-title { font-size: clamp(2.8rem, 14vw, 5rem); }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor-dot" style="top:0;left:0;position:fixed;pointer-events:none;z-index:9999">
+  <div class="cursor-dot"></div>
+</div>
+<div class="cursor" id="cursor-ring" style="top:0;left:0;position:fixed;pointer-events:none;z-index:9998">
+  <div class="cursor-ring"></div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMobile()">À propos</a>
+  <a href="#services" onclick="closeMobile()">Prestations</a>
+  <a href="#reviews" onclick="closeMobile()">Avis</a>
+  <a href="#gallery" onclick="closeMobile()">Photos</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Bike<span>Mentor</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#services">Prestations</a></li>
+    <li><a href="#reviews">Avis</a></li>
+    <li><a href="#gallery">Photos</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Contacter Théo</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-particles" id="particles"></div>
+    <svg class="hero-mountains" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- far mountains -->
+      <path d="M0,400 L0,280 L120,160 L240,220 L360,120 L480,200 L600,80 L720,180 L840,100 L960,200 L1080,130 L1200,220 L1320,140 L1440,200 L1440,400 Z" fill="rgba(30,22,8,0.5)"/>
+      <!-- mid mountains -->
+      <path d="M0,400 L0,320 L80,240 L180,300 L300,200 L420,280 L540,180 L660,260 L780,170 L900,250 L1020,200 L1140,280 L1260,220 L1380,270 L1440,240 L1440,400 Z" fill="rgba(26,18,6,0.7)"/>
+      <!-- near ridge -->
+      <path d="M0,400 L0,360 L100,300 L200,340 L350,270 L500,320 L650,260 L800,310 L950,270 L1100,320 L1250,280 L1440,310 L1440,400 Z" fill="rgba(20,14,4,0.9)"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Grenoble · Coaching VTT</div>
+    <h1 class="hero-title">
+      <span>Pilote</span>
+      <span class="accent">ton bike</span>
+      <span class="outline">avec Théo</span>
+    </h1>
+    <p class="hero-desc">Coaching VTT technique par <strong style="color:var(--chalk)">Théo Poudret</strong>, pilote trial pro. Leçons privées, stages enduro et créations originales à Grenoble — pour progresser vite et rider avec plaisir.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Contacter Théo <span>→</span></a>
+      <a href="#services" class="btn-ghost">Voir les prestations</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<div style="padding: 0 40px;">
+<div id="about">
+  <div class="about-visual reveal">
+    <div class="about-img-frame">
+      <div class="about-img-placeholder">
+        <div class="big-icon">🚵</div>
+        <p>Photo de Théo</p>
+      </div>
+    </div>
+    <div class="about-badge">
+      <strong>Pro</strong>trial<br>rider
+    </div>
+  </div>
+  <div class="about-text">
+    <div class="section-label reveal">Le coach</div>
+    <h2 class="section-title reveal reveal-delay-1">Théo<br><em>Poudret</em></h2>
+    <p class="reveal reveal-delay-2"><strong>Pilote trial professionnel</strong> et coach VTT passionné basé à Grenoble. Théo a développé une approche pédagogique unique, inspirée du trial, pour vous aider à progresser sur tous les terrains — du XC à l'enduro en passant par le VTTAE.</p>
+    <p class="reveal reveal-delay-2">Chaque session est conçue pour <strong>améliorer votre posture, vos gestes de pilotage</strong> et votre confiance en descente. Que vous soyez débutant ou rider confirmé, Théo adapte son enseignement à votre niveau.</p>
+    <div class="about-stats reveal reveal-delay-3">
+      <div>
+        <div class="stat-num">+10</div>
+        <div class="stat-label">Ans d'expérience</div>
+      </div>
+      <div>
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Riders coachés</div>
+      </div>
+      <div>
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Avis Google</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════ SERVICES ══════════ -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label reveal">Prestations</div>
+      <h2 class="section-title reveal reveal-delay-1">Choisissez<br><em>votre session</em></h2>
+    </div>
+    <a href="#contact" class="btn-ghost reveal" style="height:fit-content">Réserver →</a>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card reveal">
+      <div class="service-visual">
+        <div class="service-visual-icon">🏔️</div>
+      </div>
+      <div class="service-body">
+        <div class="service-tag">Coaching individuel</div>
+        <div class="service-name">Leçons<br>Privées</div>
+        <p class="service-desc">Une approche personnalisée pour les riders Grenoblois, du XC à l'enduro, à tous les niveaux. Basées sur la technique trial, ces leçons vous permettent d'entrer dans le détail technique de votre pilotage.</p>
+        <div class="service-footer">
+          <div class="service-detail">Tous niveaux · Grenoble</div>
+          <a href="#contact" class="service-cta">Contacter <span class="service-cta-arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-visual">
+        <div class="service-visual-icon">⛰️</div>
+      </div>
+      <div class="service-body">
+        <div class="service-tag">Premium · Journée complète</div>
+        <div class="service-name">Stage<br>Privé</div>
+        <p class="service-desc">Une journée complète de coaching technique individualisé, 1 à 2 fois dans l'année. Adressée aux pratiquants all-mountain, enduro et Ebike pour perfectionner votre pilotage en profondeur.</p>
+        <div class="service-footer">
+          <div class="service-detail">All mountain · Enduro · Ebike</div>
+          <a href="#contact" class="service-cta">Contacter <span class="service-cta-arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-visual">
+        <div class="service-visual-icon">🎯</div>
+      </div>
+      <div class="service-body">
+        <div class="service-tag">Collectif · Événements</div>
+        <div class="service-name">Créations<br>Originales</div>
+        <p class="service-desc">Stages enduro collectifs, journées shuttles, trials training camp et collectifs de trial. Des formats uniques plusieurs fois par an pour rider en groupe et progresser dans une bonne ambiance.</p>
+        <div class="service-footer">
+          <div class="service-detail">Groupes · Dates limitées</div>
+          <a href="#contact" class="service-cta">Contacter <span class="service-cta-arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ REVIEWS ══════════ -->
+<section id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-header">
+      <div>
+        <div class="section-label reveal">Témoignages</div>
+        <h2 class="section-title reveal reveal-delay-1">Ce que disent<br><em>nos riders</em></h2>
+      </div>
+      <div class="overall-block reveal">
+        <div class="overall-num" id="r-score">5.0</div>
+        <div class="overall-meta">
+          <div class="stars-row" id="r-stars"></div>
+          <div class="review-count" id="r-count">Chargement…</div>
+          <div class="google-tag"><div class="g-dot"></div> Google Reviews</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-wrap reveal">
+      <div class="carousel-track" id="r-track"></div>
+    </div>
+    <div class="carousel-controls">
+      <button class="c-btn" id="r-prev">‹</button>
+      <div class="c-dots" id="r-dots"></div>
+      <div class="progress-bar"><div class="progress-fill" id="r-progress"></div></div>
+      <button class="c-btn" id="r-next">›</button>
+    </div>
+
+    <div style="margin-top:32px; text-align:center;">
+      <a href="https://www.google.com/maps/search/BikeMentor+Grenoble" target="_blank" class="btn-ghost" id="leave-review">★ Laisser un avis Google</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GALLERY ══════════ -->
+<section id="gallery">
+  <div class="section-label reveal">Images</div>
+  <h2 class="section-title reveal reveal-delay-1">En selle<br><em>sur le terrain</em></h2>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal"><span class="gallery-placeholder">🏔️</span></div>
+    <div class="gallery-item reveal reveal-delay-1"><span class="gallery-placeholder">🚵</span></div>
+    <div class="gallery-item reveal reveal-delay-2"><span class="gallery-placeholder">⛰️</span></div>
+    <div class="gallery-item reveal reveal-delay-1"><span class="gallery-placeholder">🌲</span></div>
+    <div class="gallery-item reveal reveal-delay-2"><span class="gallery-placeholder">🎯</span></div>
+    <div class="gallery-item reveal reveal-delay-3"><span class="gallery-placeholder">🏅</span></div>
+  </div>
+  <p style="margin-top:20px; font-size:0.72rem; color:var(--bark); letter-spacing:0.08em; text-transform:uppercase;">
+    → Remplacez les emojis par vos vraies photos
+  </p>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-label reveal">Contact</div>
+      <h2 class="section-title reveal reveal-delay-1">Prêt à<br><em>progresser ?</em></h2>
+      <p class="reveal reveal-delay-2">Décrivez votre niveau, la prestation qui vous intéresse et vos disponibilités. Théo vous répond personnellement pour organiser votre session.</p>
+      <div class="contact-info reveal reveal-delay-3">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div><strong>Grenoble</strong>, Isère — Alpes</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🚵</div>
+          <div>Tous terrains, <strong>tous niveaux</strong></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📅</div>
+          <div>Sessions disponibles <strong>toute l'année</strong></div>
+        </div>
+      </div>
+      <div class="response-time reveal reveal-delay-4">
+        <div class="response-dot"></div>
+        Réponse sous 24h ✓
+      </div>
+    </div>
+
+    <div>
+      <form class="contact-form reveal reveal-delay-1" id="contact-form" onsubmit="submitForm(event)">
+        <div class="field-group">
+          <div class="field">
+            <label>Prénom *</label>
+            <input type="text" placeholder="Thomas" required>
+          </div>
+          <div class="field">
+            <label>Nom *</label>
+            <input type="text" placeholder="Dupont" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>Email *</label>
+          <input type="email" placeholder="thomas@email.com" required>
+        </div>
+        <div class="field">
+          <label>Quelle prestation vous intéresse ?</label>
+          <select>
+            <option value="">— Choisissez —</option>
+            <option>Leçons privées</option>
+            <option>Stage privé (journée complète)</option>
+            <option>Créations originales (collectifs)</option>
+            <option>Autre / Je ne sais pas encore</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Votre message *</label>
+          <textarea placeholder="Décrivez votre niveau, vos objectifs et vos disponibilités…" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Envoyer le message →</button>
+        <p class="form-note">🔒 Vos données ne sont pas partagées à des tiers.</p>
+      </form>
+      <div class="form-success" id="form-success">
+        <div class="success-icon">🤙</div>
+        <h4>Message envoyé !</h4>
+        <p>Merci ! Théo vous répondra dans les 24h.<br>En attendant, suivez BikeMentor sur Instagram pour voir les dernières sessions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Bike<span>Mentor</span></div>
+  <div class="footer-copy">© 2025 BikeMentor · Grenoble · Tous droits réservés</div>
+  <div class="footer-social">
+    <a href="https://instagram.com/bikementor" target="_blank" title="Instagram">📷</a>
+    <a href="https://youtube.com" target="_blank" title="YouTube">▶</a>
+    <a href="https://www.google.com/maps/search/BikeMentor+Grenoble" target="_blank" title="Google Maps">📍</a>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+const dot  = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+document.addEventListener('mousemove', e => {
+  dot.style.left  = e.clientX + 'px';
+  dot.style.top   = e.clientY + 'px';
+  ring.style.left = e.clientX + 'px';
+  ring.style.top  = e.clientY + 'px';
+});
+
+/* ── NAV SCROLL ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ── MOBILE MENU ── */
+function toggleMobile() {
+  const h = document.getElementById('hamburger');
+  const m = document.getElementById('mobile-menu');
+  h.classList.toggle('open');
+  m.classList.toggle('open');
+  document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobile() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ── PARTICLES ── */
+const pContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left   = Math.random() * 100 + '%';
+  p.style.bottom = Math.random() * 40 + '%';
+  p.style.animationDuration  = (4 + Math.random() * 8) + 's';
+  p.style.animationDelay     = (Math.random() * 6) + 's';
+  p.style.width  = (1 + Math.random() * 2) + 'px';
+  p.style.height = p.style.width;
+  pContainer.appendChild(p);
+}
+
+/* ── SCROLL REVEAL ── */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+/* ── REVIEWS ── */
+const DEMO = [
+  { name:'Stéphane M.', rating:5, when:'il y a 2 semaines',
+    text:'Théo propose un super équilibre entre expliquer le pourquoi des choses et faire ressentir les sensations. Un vrai talent pédagogique !',
+    service:'Leçons privées enduro' },
+  { name:'Thierry B.', rating:5, when:'il y a 1 mois',
+    text:"Avant ça je ne pensais pas reprendre des cours après 30 ans de pratique. Maintenant j'ai vraiment réappris à piloter — incroyable.",
+    service:'Leçons privées all mountain' },
+  { name:'Marc L.', rating:5, when:'il y a 3 semaines',
+    text:"Super stage, bonne humeur communicative, situations bien choisies pour progresser et se régaler. On reviendra c'est certain !",
+    service:'Stage enduro' },
+  { name:'Julie R.', rating:5, when:'il y a 2 mois',
+    text:"Approche unique basée sur le trial — en une demi-journée j'ai plus progressé qu'en une saison complète. Merci Théo !",
+    service:'Leçons privées' },
+  { name:'Antoine D.', rating:5, when:'il y a 5 semaines',
+    text:"Session top, ambiance détendue et pédagogie au top. Je recommande pour tous les niveaux, vraiment.",
+    service:'Créations originales' },
+];
+
+function initials(n) { return n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(); }
+function stars(r, cls='cs') {
+  return Array.from({length:5},(_,i)=>`<span class="${cls}${i<r?'':' e'}">★</span>`).join('');
+}
+
+function buildCard(r) {
+  const d = document.createElement('div');
+  d.className = 'review-card';
+  d.innerHTML = `
+    <div class="card-top">
+      <div class="reviewer-av">${initials(r.name)}</div>
+      <div><div class="reviewer-name">${r.name}</div><div class="review-when">${r.when}</div></div>
+    </div>
+    <div class="card-stars">${stars(r.rating)}</div>
+    <div class="review-text">« ${r.text} »</div>
+    <div class="review-service">🚵 ${r.service}</div>`;
+  return d;
+}
+
+const CARD_W = 300 + 20;
+let idx = 0, autoTimer, progTimer;
+const track    = document.getElementById('r-track');
+const dotsEl   = document.getElementById('r-dots');
+const progress = document.getElementById('r-progress');
+
+function renderStars(rating, el) {
+  el.innerHTML = Array.from({length:5},(_,i)=>`<span class="star-icon${i<Math.round(rating)?'':' empty'}">★</span>`).join('');
+}
+
+function initReviews(list) {
+  track.innerHTML = '';
+  dotsEl.innerHTML = '';
+  list.forEach((r,i) => {
+    track.appendChild(buildCard(r));
+    const d = document.createElement('div');
+    d.className = 'c-dot' + (i===0?' on':'');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+  document.getElementById('r-score').textContent = '5.0';
+  renderStars(5, document.getElementById('r-stars'));
+  document.getElementById('r-count').textContent = `${list.length} avis (démo — connectez votre API Google)`;
+  startAuto(list.length);
+}
+
+function goTo(i, total) {
+  idx = i;
+  track.style.transform = `translateX(-${i * CARD_W}px)`;
+  document.querySelectorAll('.c-dot').forEach((d,j) => d.classList.toggle('on', j===i));
+  resetAuto(total || DEMO.length);
+}
+
+function startAuto(total) {
+  clearInterval(autoTimer);
+  autoTimer = setInterval(() => goTo((idx+1) % total, total), 4500);
+  animProg();
+}
+function resetAuto(total) {
+  clearInterval(autoTimer);
+  clearTimeout(progTimer);
+  progress.style.transition = 'none';
+  progress.style.width = '0%';
+  progTimer = setTimeout(() => startAuto(total), 60);
+}
+function animProg() {
+  progress.style.transition = 'none';
+  progress.style.width = '0%';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    progress.style.transition = 'width 4500ms linear';
+    progress.style.width = '100%';
+  }));
+}
+
+document.getElementById('r-prev').onclick = () => goTo((idx - 1 + DEMO.length + DEMO.length) % DEMO.length, DEMO.length);
+document.getElementById('r-next').onclick = () => goTo((idx + 1) % DEMO.length, DEMO.length);
+
+initReviews(DEMO);
+
+/* ── FORM ── */
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
