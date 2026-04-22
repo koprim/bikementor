@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BikeMentor — Coaching VTT</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-icon">⛰</span>
+        <span>Bike<strong>Mentor</strong></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">Le Coach</a></li>
+        <li><a href="#services" class="nav-link">Programmes</a></li>
+        <li><a href="#results" class="nav-link">Résultats</a></li>
+        <li><a href="#testimonials" class="nav-link">Témoignages</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li>
+          <a href="https://wa.me/33600000000?text=Bonjour%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20le%20coaching%20VTT."
+             class="btn-whatsapp" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Contacter le coach
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-badge">Coaching VTT Professionnel</span>
+      <h1>Repousse tes <em>limites</em><br/>sur chaque sentier</h1>
+      <p>Accompagnement personnalisé pour riders de tous niveaux.<br/>Technique, endurance, mental — progresse vraiment.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Découvrir les programmes</a>
+        <a href="#about" class="btn-outline">En savoir plus</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <strong>+200</strong>
+          <span>Riders coachés</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <strong>8 ans</strong>
+          <span>D'expérience</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <strong>98%</strong>
+          <span>Satisfaction</span>
+        </div>
+      </div>
+    </div>
+    <a href="#about" class="scroll-indicator" aria-label="Défiler vers le bas">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrap">
+          <div class="about-image">
+            <div class="about-image-placeholder">
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="70" r="35" fill="#e05c00" opacity="0.8"/>
+                <ellipse cx="100" cy="160" rx="55" ry="45" fill="#e05c00" opacity="0.6"/>
+                <circle cx="55" cy="155" r="28" fill="none" stroke="#e05c00" stroke-width="4"/>
+                <circle cx="145" cy="155" r="28" fill="none" stroke="#e05c00" stroke-width="4"/>
+                <line x1="55" y1="127" x2="100" y2="115" stroke="#e05c00" stroke-width="4"/>
+                <line x1="145" y1="127" x2="100" y2="115" stroke="#e05c00" stroke-width="4"/>
+              </svg>
+            </div>
+          </div>
+          <div class="about-badge-card">
+            <strong>Pro Certifié</strong>
+            <span>FFVELO Niveau 3</span>
+          </div>
+        </div>
+        <div class="about-text">
+          <span class="section-tag">Le Coach</span>
+          <h2>Maxime Leroux,<br/>passionné de sentiers</h2>
+          <p class="about-lead">Ancien compétiteur en coupe de France Enduro, je coache des riders depuis 8 ans avec une approche centrée sur la progression réelle et durable.</p>
+          <p>Ma méthode allie analyse technique vidéo, plans d'entraînement individualisés et sorties terrain. Chaque rider est unique — ton programme l'est aussi.</p>
+          <ul class="about-features">
+            <li>
+              <span class="feature-icon">🎯</span>
+              <div>
+                <strong>Approche individualisée</strong>
+                <p>Chaque programme est construit autour de tes objectifs et de ton niveau actuel.</p>
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">📹</span>
+              <div>
+                <strong>Analyse vidéo</strong>
+                <p>Retours détaillés sur ta technique en image pour progresser plus vite.</p>
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon">📍</span>
+              <div>
+                <strong>Sorties terrain</strong>
+                <p>Sessions en conditions réelles sur les meilleurs spots de la région.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section section-dark" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Programmes</span>
+        <h2>Choisis ton coaching</h2>
+        <p>Des formules adaptées à chaque rider, du débutant au confirmé.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🌱</div>
+          <div class="service-badge">Débutant</div>
+          <h3>Initiation VTT</h3>
+          <p>Maîtrise les bases : position, freinage, gestion du dévers. Idéal pour partir du bon pied.</p>
+          <ul class="service-list">
+            <li>2 séances terrain / mois</li>
+            <li>Plan technique personnalisé</li>
+            <li>Support WhatsApp inclus</li>
+          </ul>
+          <a href="https://wa.me/33600000000?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20programme%20Initiation." class="btn-service" target="_blank" rel="noopener">
+            Je veux ce programme →
+          </a>
+        </div>
+
+        <div class="service-card service-card--featured">
+          <div class="service-icon">🔥</div>
+          <div class="service-badge service-badge--featured">Populaire</div>
+          <h3>Progression Enduro</h3>
+          <p>Gagne en technicité et en endurance. Le programme complet pour rider plus vite et plus loin.</p>
+          <ul class="service-list">
+            <li>4 séances terrain / mois</li>
+            <li>Analyse vidéo mensuelle</li>
+            <li>Plan d'entraînement physique</li>
+            <li>Support WhatsApp inclus</li>
+          </ul>
+          <a href="https://wa.me/33600000000?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20programme%20Enduro." class="btn-service btn-service--featured" target="_blank" rel="noopener">
+            Je veux ce programme →
+          </a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏆</div>
+          <div class="service-badge">Compétition</div>
+          <h3>Prépa Compétition</h3>
+          <p>Prépare-toi pour les courses avec un suivi intensif et une stratégie de performance sur mesure.</p>
+          <ul class="service-list">
+            <li>Suivi hebdomadaire complet</li>
+            <li>Analyse vidéo bimensuelle</li>
+            <li>Nutrition & récupération</li>
+            <li>Coaching le jour J</li>
+          </ul>
+          <a href="https://wa.me/33600000000?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20pr%C3%A9paration%20comp%C3%A9tition." class="btn-service" target="_blank" rel="noopener">
+            Je veux ce programme →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section" id="results">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Résultats</span>
+        <h2>Ce que mes riders atteignent</h2>
+        <p>Des progressions concrètes et mesurables, quelle que soit la discipline.</p>
+      </div>
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-number">+40%</div>
+          <div class="result-label">de vitesse en descente</div>
+          <div class="result-detail">en seulement 3 mois de coaching technique</div>
+        </div>
+        <div class="result-card">
+          <div class="result-number">-30%</div>
+          <div class="result-label">de chutes évitées</div>
+          <div class="result-detail">grâce à une meilleure lecture du terrain</div>
+        </div>
+        <div class="result-card">
+          <div class="result-number">×2</div>
+          <div class="result-label">dénivelé parcouru</div>
+          <div class="result-detail">après 6 mois de suivi endurance</div>
+        </div>
+        <div class="result-card">
+          <div class="result-number">Top 10</div>
+          <div class="result-label">en compétition régionale</div>
+          <div class="result-detail">pour 3 riders après une saison de prépa</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section section-dark" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Témoignages</span>
+        <h2>Ils ont franchi le cap</h2>
+        <p>La progression de mes riders, c'est ma plus grande fierté.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Après 2 ans à stagner, j'ai progressé plus en 3 mois avec Maxime qu'en tout ce temps seul. Son analyse vidéo m'a ouvert les yeux sur mes erreurs de position."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">TM</div>
+            <div>
+              <strong>Thomas M.</strong>
+              <span>Rider Enduro, Lyon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card testimonial-card--featured">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"Je suis passée du tout-plat à valider des descentes techniques en quelques séances. Maxime adapte vraiment son coaching à ton niveau, sans jamais te mettre en danger."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SB</div>
+            <div>
+              <strong>Sophie B.</strong>
+              <span>Débutante devenue passionnée</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p>"J'ai terminé 8ème à la coupe régionale cette saison. La préparation avec Maxime a tout changé, autant physiquement que mentalement. Je reparts pour une saison !"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">KR</div>
+            <div>
+              <strong>Kevin R.</strong>
+              <span>Compétiteur Enduro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">FAQ</span>
+        <h2>Questions fréquentes</h2>
+        <p>Tout ce que tu veux savoir avant de commencer.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Quel niveau faut-il pour commencer ?
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Aucun niveau minimum requis. J'accompagne des riders de tous niveaux, des débutants complets aux compétiteurs. Ce qui compte, c'est ta motivation à progresser.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Les séances se déroulent où ?
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Les sorties terrain ont lieu sur les meilleurs spots de la région (Chartreuse, Belledonne, Vercors). Certains suivis peuvent également se faire à distance via analyse vidéo et échanges WhatsApp.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Ai-je besoin d'un vélo spécifique ?
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Non, tu peux venir avec le vélo que tu as. Je te conseille si besoin sur l'équipement adapté à ta pratique et à tes objectifs, mais ce n'est jamais un prérequis.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Comment se passe le premier contact ?
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Un simple message WhatsApp suffit. On échange sur tes objectifs, ton niveau, et tes disponibilités. Je te propose ensuite la formule la plus adaptée. Le premier appel est gratuit et sans engagement.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Peut-on faire du coaching en groupe ?
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Oui, je propose des sessions en petit groupe (2 à 4 riders) idéales pour les amis qui veulent progresser ensemble. Les tarifs sont dégressifs. Contacte-moi pour en savoir plus.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Prêt à rider différemment ?</h2>
+        <p>Un message sur WhatsApp, et on définit ensemble ton programme de progression.</p>
+        <a href="https://wa.me/33600000000?text=Bonjour%20Maxime%2C%20je%20voudrais%20en%20savoir%20plus%20sur%20le%20coaching%20VTT."
+           class="btn-whatsapp-large" target="_blank" rel="noopener">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Démarrer sur WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#hero" class="nav-logo">
+            <span class="logo-icon">⛰</span>
+            <span>Bike<strong>Mentor</strong></span>
+          </a>
+          <p>Coaching VTT professionnel pour riders de tous niveaux. Progresse sur les sentiers qui comptent pour toi.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#about">Le Coach</a></li>
+            <li><a href="#services">Programmes</a></li>
+            <li><a href="#results">Résultats</a></li>
+            <li><a href="#testimonials">Témoignages</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <a href="https://wa.me/33600000000" target="_blank" rel="noopener" class="footer-whatsapp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            WhatsApp
+          </a>
+          <p class="footer-note">Réponse sous 24h en semaine</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 BikeMentor — Tous droits réservés</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
