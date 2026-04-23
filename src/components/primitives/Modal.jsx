@@ -18,7 +18,14 @@ export default function Modal({ open, onClose, labelledBy, describedBy, children
   if (!open) return null;
 
   return createPortal(
-    <FocusTrap active={false}>
+    <FocusTrap
+      focusTrapOptions={{
+        initialFocus: '#modal-close-btn',
+        fallbackFocus: '#modal-close-btn',
+        escapeDeactivates: false,
+        allowOutsideClick: true,
+      }}
+    >
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div
           data-testid="modal-scrim"
