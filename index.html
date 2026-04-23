@@ -1,10 +1,34 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bikementor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#EBE6DD" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161614" media="(prefers-color-scheme: dark)" />
+
+    <title>bikementor · Coaching VTT par Théo Poudret à Grenoble</title>
+    <meta name="description" content="Stages privés, leçons et collectifs de pilotage VTT à Grenoble. Enduro, trial, all-mountain, Ebike. Par Théo Poudret, pilote trial professionnel." />
+    <link rel="canonical" href="https://bikementor.fr/" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif&family=Commissioner:wght@300;500;700&family=JetBrains+Mono:wght@500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif&family=Commissioner:wght@300;500;700&family=JetBrains+Mono:wght@500&display=swap" />
+
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefers = matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.setAttribute('data-theme', saved || (prefers ? 'dark' : 'light'));
+        } catch (_) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
