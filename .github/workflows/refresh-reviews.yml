@@ -1,0 +1,39 @@
+name: Refresh Google Reviews
+
+on:
+  schedule:
+    - cron: '0 4 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Fetch Google reviews
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: npm run fetch-reviews
+
+      - name: Commit if changed
+        run: |
+          if ! git diff --quiet src/lib/content/reviews.json; then
+            git config user.name "bikementor-bot"
+            git config user.email "bot@bikementor.fr"
+            git add src/lib/content/reviews.json
+            git commit -m "chore: refresh google reviews $(date -u +%Y-%m-%d)"
+            git push
+          else
+            echo "Pas de changement dans les avis."
+          fi
