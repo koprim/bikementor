@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D0D0B"/>
+      <stop offset="100%" stop-color="#1C1C1A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <polygon points="0,1080 320,520 580,780 900,340 1200,640 1500,420 1720,600 1920,1080" fill="#161614"/>
+  <polygon points="0,1080 200,680 420,900 700,560 980,820 1260,500 1520,700 1920,1080" fill="#1A1A18"/>
+  <text x="960" y="560" font-family="Georgia, serif" font-size="36" fill="#3A3A38" text-anchor="middle">Vidéo / photo héro · à remplacer</text>
+</svg>

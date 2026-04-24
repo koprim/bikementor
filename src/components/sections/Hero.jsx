@@ -22,13 +22,13 @@ export default function Hero() {
         {shouldLoadVideo ? (
           <VideoPlayer
             src="/videos/hero.mp4"
-            poster="/posters/hero.webp"
+            poster="/posters/hero.svg"
             label="Pilotage VTT en montagne"
             preload="metadata"
           />
         ) : (
           <img
-            src="/posters/hero.webp"
+            src="/posters/hero.svg"
             alt="Pilotage VTT en montagne"
             width="1920"
             height="1080"

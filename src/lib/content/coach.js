@@ -1,7 +1,7 @@
 export const coach = {
   name: 'Théo Poudret',
   title: 'Pilote trial pro · Coach VTT',
-  photo: '/coach.webp',
+  photo: '/coach.svg',
   credentials: ['TODO confirmer le diplôme BE/DE VTT'],
   zone: 'Grenoble',
   bio: "TODO rédiger 2-3 lignes de bio",

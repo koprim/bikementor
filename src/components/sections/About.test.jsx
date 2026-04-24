@@ -11,7 +11,7 @@ describe('About', () => {
   it('renders coach photo with alt text', () => {
     render(<About />);
     const img = screen.getByAltText(/théo poudret/i);
-    expect(img).toHaveAttribute('src', '/coach.webp');
+    expect(img).toHaveAttribute('src', '/coach.svg');
   });
 
   it('renders zone Grenoble', () => {
