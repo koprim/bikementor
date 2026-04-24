@@ -1,0 +1,40 @@
+RewriteEngine On
+
+# HTTPS forcé
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# www → apex
+RewriteCond %{HTTP_HOST} ^www\.bikementor\.fr$ [NC]
+RewriteRule ^(.*)$ https://bikementor.fr/$1 [L,R=301]
+
+# Redirections WordPress → one-page
+RewriteRule ^services/stage-prive/?$           /#prestations [L,R=301]
+RewriteRule ^services/lecons-privees/?$        /#prestations [L,R=301]
+RewriteRule ^services/creations-originales/?$  /#prestations [L,R=301]
+RewriteRule ^become-a-volunteer/?$             /#prestations [L,R=301]
+RewriteRule ^contact/?$                        /#contact     [L,R=301]
+RewriteRule ^videos-3/?$                       /#prestations [L,R=301]
+RewriteRule ^images/?$                         /             [L,R=301]
+RewriteRule ^blog/?.*$                         /             [L,R=301]
+RewriteRule ^event/?$                          /#prestations [L,R=301]
+RewriteRule ^services_group/.*$                /#prestations [L,R=301]
+
+# Cache + compression
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType video/mp4              "access plus 1 month"
+  ExpiresByType image/webp             "access plus 1 month"
+  ExpiresByType image/jpeg             "access plus 1 month"
+  ExpiresByType image/png              "access plus 1 month"
+  ExpiresByType font/woff2             "access plus 1 year"
+  ExpiresByType text/css               "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/html              "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+ErrorDocument 404 /404.html
