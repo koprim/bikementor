@@ -9,7 +9,9 @@ export async function fetchAndWriteReviews({ placeId, outPath, apiKey = process.
   if (!apiKey) throw new Error('GOOGLE_PLACES_API_KEY manquant');
   if (!placeId) throw new Error('placeId manquant');
 
-  const url = `https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}?languageCode=fr`;
+  // kgmid format (/g/xxx) → strip leading slash for path segment
+  const placeSegment = placeId.startsWith('/') ? placeId.slice(1) : placeId;
+  const url = `https://places.googleapis.com/v1/places/${placeSegment}?languageCode=fr`;
   const res = await fetch(url, {
     headers: {
       'X-Goog-Api-Key': apiKey,
