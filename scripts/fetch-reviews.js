@@ -61,7 +61,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     const r = await fetchAndWriteReviews({ placeId: config.placeId, outPath });
     console.log(`✓ ${r.reviews.length} avis écrits dans ${outPath}`);
   } catch (err) {
-    console.error(`✗ fetch-reviews: ${err.message} — fichier conservé`);
+    process.stdout.write(`✗ fetch-reviews: ${err.message} — fichier conservé\n`);
     process.exit(1);
   }
 }
