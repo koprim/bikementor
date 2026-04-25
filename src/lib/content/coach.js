@@ -8,7 +8,7 @@ export const coach = {
   whatsappUrl: 'https://wa.me/message/CPLLJRUYZ43DB1',
   socials: {
     youtube:   'https://www.youtube.com/channel/UCSWGp0nrUZ1AuUmXJXZa1VQ',
-    instagram: "TODO fournir l'URL",
-    facebook:  "TODO fournir l'URL",
+    instagram: 'https://www.instagram.com/bikementor/',
+    facebook:  'https://www.facebook.com/bikementorGrenoble/',
   },
 };
