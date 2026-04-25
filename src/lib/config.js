@@ -1,5 +1,5 @@
 export const config = {
-  placeId: 'ChIJNWb3G5v0ikcRlrAWJTIIhac',
+  placeId: null,
   siteUrl: 'https://bikementor.fr',
   siteName: 'bikementor',
 };
