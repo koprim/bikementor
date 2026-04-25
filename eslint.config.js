@@ -32,4 +32,10 @@ export default defineConfig([
       globals: { ...globals.browser, ...globals.node },
     },
   },
+  {
+    files: ['scripts/**/*.{js,jsx}'],
+    languageOptions: {
+      globals: { ...globals.node, fetch: 'readonly' },
+    },
+  },
 ])

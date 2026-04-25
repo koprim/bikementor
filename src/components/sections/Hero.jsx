@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import VideoPlayer from '../ui/VideoPlayer.jsx';
 import WhatsAppButton from '../ui/WhatsAppButton.jsx';
 
 function useShouldLoadHeroVideo() {
-  const [shouldLoad, setShouldLoad] = useState(false);
-  useEffect(() => {
+  const [shouldLoad] = useState(() => {
     const isMobile = matchMedia('(max-width: 640px)').matches;
     const saveData = navigator.connection && navigator.connection.saveData;
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    setShouldLoad(!isMobile && !saveData && !reducedMotion);
-  }, []);
+    return !isMobile && !saveData && !reducedMotion;
+  });
   return shouldLoad;
 }
 
