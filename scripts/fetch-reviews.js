@@ -18,16 +18,20 @@ export async function fetchAndWriteReviews({ placeId, outPath, apiKey = process.
   });
 
   if (!res.ok) {
-    throw new Error(`Places API ${res.status}`);
+    const body = await res.text().catch(() => '(no body)');
+    throw new Error(`Places API ${res.status} — ${body}`);
   }
 
   const data = await res.json();
-  const filtered = (data.reviews ?? [])
+  const all = data.reviews ?? [];
+  const filtered = all
     .filter(r => (r.text?.text ?? '').trim().length >= MIN_TEXT_LENGTH)
     .slice(0, MAX_REVIEWS);
 
   if (filtered.length === 0) {
-    throw new Error('no review passed the quality filter');
+    throw new Error(
+      `no review passed the quality filter (total from API: ${all.length}, min length: ${MIN_TEXT_LENGTH})`
+    );
   }
 
   const normalized = {
@@ -56,6 +60,9 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const { config } = await import(pathToFileURL(resolve(__dirname, '../src/lib/config.js')).href);
   const outPath = resolve(__dirname, '../src/lib/content/reviews.json');
+
+  console.log(`  place ID : ${config.placeId}`);
+  console.log(`  API key  : ${process.env.GOOGLE_PLACES_API_KEY ? '✓ présente' : '✗ manquante'}`);
 
   try {
     const r = await fetchAndWriteReviews({ placeId: config.placeId, outPath });
