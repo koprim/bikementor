@@ -51,3 +51,20 @@ Avoid generic "AI slop" aesthetics. Make creative, distinctive frontends that su
 - **Motion:** Use animations for effects and micro-interactions. Prioritize CSS-only solutions. Use Motion library for React when available. Focus on high-impact moments: one well-orchestrated page load with staggered reveals (`animation-delay`) creates more delight than scattered micro-interactions.
 - **Backgrounds:** Create atmosphere and depth rather than defaulting to solid colors. Layer CSS gradients, use geometric patterns, or add contextual effects that match the overall aesthetic.
 - **Originality:** Avoid predictable layouts, cookie-cutter component patterns, and overused font/color combinations (e.g. Space Grotesk). Vary between light and dark themes, different fonts, different aesthetics. Interpret creatively and make unexpected choices that feel genuinely designed for the context.
+
+## Running the project
+
+```bash
+npm install            # once
+npm run dev            # dev server on http://localhost:5173
+npm test               # unit tests (vitest)
+npm run lint           # eslint
+npm run fetch-reviews  # fetch Google reviews (requires GOOGLE_PLACES_API_KEY env)
+npm run build          # production bundle in dist/
+```
+
+Environment: copy `.env.example` to `.env` and fill `GOOGLE_PLACES_API_KEY` for local `fetch-reviews` runs. The key is never read by the Vite build — only by the Node script.
+
+Deploy:
+- Staging: every push to GitHub auto-deploys on Vercel.
+- Production: push a git tag `vX.Y.Z` → GitHub Actions uploads `dist/` to o2switch via FTPS.
