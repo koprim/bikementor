@@ -1,5 +1,5 @@
 export const config = {
-  placeId: 'TODO renseigner le Google Place ID (public, non sensible)',
+  placeId: 'BUkb3KONikefOF2VDlt7og',
   siteUrl: 'https://bikementor.fr',
   siteName: 'bikementor',
 };
